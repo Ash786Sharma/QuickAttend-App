@@ -1,2 +1,2 @@
-# Employee_Attendance-App
+# QuickAttend!!!
 Employee Attendance App for android &amp; web platforms.
