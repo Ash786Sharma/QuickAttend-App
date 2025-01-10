@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:flutter_application_1/Services/notification_service.dart';
-import 'package:flutter_application_1/Services/socket_service.dart';
+import 'package:quickattend/Services/notification_service.dart';
+import 'package:quickattend/Services/socket_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'routes.dart';
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Employee Attendance',
+      title: 'Quick Attend',
       theme: AppColorScheme.lightTheme,
       darkTheme: AppColorScheme.darkTheme,
       themeMode: ThemeMode.system, // Automatically switch between light and dark

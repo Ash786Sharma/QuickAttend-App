@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Services/api_service.dart';
+import 'package:quickattend/Services/api_service.dart';
 import '../Widgets/custom_text_field.dart';
 import '../Widgets/custom_button.dart';
 

@@ -5,7 +5,7 @@ const AdminSettings = require('../Models/AdimnSettings'); // Ensure the path is 
 // Apply Attendance (Unified Approach)
 exports.applyAttendance = async (req, res) => {
     try {
-        const {employeeId, role} = req.user
+        const {employeeId, name, role} = req.user
         const { date, status, location, projectName, remark, leaveType, approverName } = req.body;
 
         // Validation: Check required fields
@@ -84,6 +84,7 @@ exports.applyAttendance = async (req, res) => {
         if (!attendance) {
             attendance = new Attendance({
                 employeeId,
+                name,
                 year,
                 entries: [],
             });
@@ -135,6 +136,8 @@ const generateDateRange = (startDate, endDate) => {
 // Get Full Calendar with Admin and User Data
 exports.getFullCalendar = async (req, res) => {
     try {
+        //console.log("working");
+        
         const {employeeId} = req.user; // From authenticated user
         //console.log(employeeId);
         
@@ -147,7 +150,7 @@ exports.getFullCalendar = async (req, res) => {
         }
 
         // Fetch user-specific entries
-        const userEntries = await Attendance.findOne({ employeeId }) || { entries: [] };
+        const userEntries = await Attendance.findOne({ employeeId, year }) || { entries: [] };
         //console.log(userEntries);
         
 

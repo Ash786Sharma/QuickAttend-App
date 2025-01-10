@@ -1,5 +1,5 @@
-name: flutter_application_1
-description: "A new Flutter project."
+name: quickattend
+description: "A Quick Attendance App."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -31,7 +31,7 @@ dependencies:
   http: 
   provider: ^6.0.3
   table_calendar: ^3.0.6
-  flutter_timezone: ^3.0.1
+  flutter_timezone: ^4.0.0
   timezone: ^0.10.0
   flutter_local_notifications: ^18.0.1
   intl: ^0.19.0
@@ -51,9 +51,20 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "./lib/Assets/icon/icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#FFFFFF" # Choose a background color
+  adaptive_icon_foreground: "./lib/Assets/icon/icon.png"
  
 
 dev_dependencies:
+
+  flutter_launcher_icons: ^0.14.2
+
   flutter_test:
     sdk: flutter
 
@@ -62,7 +73,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

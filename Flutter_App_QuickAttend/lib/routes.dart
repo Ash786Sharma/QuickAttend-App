@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Screens/apply_attendance_screen.dart';
-import 'package:flutter_application_1/Screens/delete_user_screen.dart';
-import 'package:flutter_application_1/Screens/report_generation_screen.dart';
-import 'package:flutter_application_1/Screens/set_weeklyoffs_screen.dart';
+import 'package:quickattend/Screens/apply_attendance_screen.dart';
+import 'package:quickattend/Screens/delete_user_screen.dart';
+import 'package:quickattend/Screens/report_generation_screen.dart';
+import 'package:quickattend/Screens/set_weeklyoffs_screen.dart';
 import 'Screens/set_holiday_screen.dart';
 import 'Screens/admin_screen.dart';
 import 'Screens/home_screen.dart';

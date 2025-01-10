@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _showSnackBar('Invalid response data from server.');
         return;
       }
-
+      //debugPrint(token);
       // Show success message and navigate to home
       _showSnackBar(response['message'] ?? 'Login successful!');
       Navigator.pushReplacementNamed(context, '/home');
@@ -122,18 +122,23 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xFFE21B5A),
-              Color(0xFF9E0C39),
-              Color(0xFF333333)
-            ])
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: Theme.of(context).brightness == Brightness.dark
+                ? [
+                    Colors.black,
+                    Color(0xFF9E0C39),
+                  ]
+                : [
+                    Color(0xFFE21B5A),
+                    Color(0xFF9E0C39),
+                    Color(0xFF333333)
+                  ],)
           ),
-          child: const Padding(
-            padding: EdgeInsets.only(top: 60.0, left: 22),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 60.0, left: 22),
             child: Text('Hello,\nLog in!', style: TextStyle(fontSize: 30,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFFBFFE3),
+            color: Theme.of(context).brightness == Brightness.dark ? Color(0xFFE21B5A) :Color(0xFFFBFFE3)
             ),)
           )
         ),
@@ -142,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color(0xFFFBFFE3),
+            color: Theme.of(context).brightness == Brightness.dark ? Color(0xFF333333) :Color(0xFFFBFFE3),
             boxShadow: [ 
               BoxShadow(
                 color: Colors.black.withOpacity(0.9), // Shadow color with transparency

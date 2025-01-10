@@ -95,6 +95,9 @@ class _LeaveFormState extends State<LeaveForm> {
       final response = await ApiService.post('/attendance/apply', data);
       if (response['success'] == true) {
         _showSnackBar(response['message'] ?? 'Attendance applied successfully!');
+        _selectedLeaveType = null;
+        _approverNameController.clear();
+        _remarkController.clear();
         widget.onAttendanceApplied();
       } else {
         _showSnackBar('Error: ${response['error']}, Try again!');

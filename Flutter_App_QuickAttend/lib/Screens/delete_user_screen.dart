@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Services/api_service.dart';
+import 'package:quickattend/Services/api_service.dart';
 
 class DeleteUserScreen extends StatefulWidget {
   const DeleteUserScreen({super.key});

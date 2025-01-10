@@ -108,7 +108,7 @@ class _SetHolidayScreenState extends State<SetHolidayScreen> {
     try {
       final formattedDates = _selectedDates.map((date) => _dateFormat.format(date)).toList();
       final response = await ApiService.post('/admin/setHolidays', {'holidays': formattedDates});
-      debugPrint('$response');
+      //debugPrint('$response');
       if (response['success'] == true) {
         SocketService().emit('update_WeeklyOffOrHoliday', null);
         _showSnackBar(response['message'] ?? 'Holidays set successfully!');
