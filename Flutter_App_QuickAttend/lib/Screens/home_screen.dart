@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       if (response['success'] == true && response['calendar'] != null) {
         final data = response['calendar'] as List;
         setState(() {
-          calendarStatus = {
+        calendarStatus = {
             for (var entry in data) entry['date']: entry['status']
           };
           _selectedDay = null;
@@ -180,6 +180,15 @@ Widget build(BuildContext context) {
         ),
         title: Text(' ${userData?['name'] ?? "User"} '),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh), // Add refresh icon
+            onPressed: () {
+              _fetchCalendarSettings(); // Call the calendar refresh function
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Calendar refreshed')),
+              ); // Optional feedback to the user
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.notifications),
             onPressed: _openNotificationSettings,

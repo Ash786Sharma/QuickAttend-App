@@ -11,7 +11,7 @@ class NotificationService{
   static Future<void> onDidReceiveNotification(NotificationResponse notificationResponse) async {}
 
   static Future<void> init() async {
-    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings("@mipmap/launcher_icon");
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings("@drawable/ic_notification");
 
     const DarwinInitializationSettings iOSinitializationSettings = DarwinInitializationSettings();
 
@@ -40,8 +40,8 @@ class NotificationService{
       android: AndroidNotificationDetails(
         "channel_Id", 
         "channel_Name",
-             importance: Importance.high,
-             priority: Priority.high
+             importance: Importance.max,
+             priority: Priority.max
         ),
         iOS: DarwinNotificationDetails()
     );
@@ -59,8 +59,8 @@ class NotificationService{
       android: AndroidNotificationDetails(
         "channel_Id", 
         "channel_Name",
-             importance: Importance.high,
-             priority: Priority.high
+             importance: Importance.max,
+             priority: Priority.max
         ),
         iOS: DarwinNotificationDetails()
     );
@@ -109,8 +109,8 @@ class NotificationService{
     android: AndroidNotificationDetails(
       "daily_channel",
       "Daily Notifications",
-      importance: Importance.high,
-      priority: Priority.high,
+      importance: Importance.max,
+      priority: Priority.max,
     ),
     iOS: DarwinNotificationDetails(),
   );
