@@ -1,7 +1,7 @@
 const moment = require('moment');
 
 const Attendance = require('../models/Attendance');
-const AdminSettings = require('../Models/AdimnSettings');
+const AdminSettings = require('../models/AdimnSettings');
 const User = require('../models/User');
 const {generateReportData, createAndSendExcel} = require('../utils/reportUtils')
 

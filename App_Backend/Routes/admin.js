@@ -1,5 +1,5 @@
 const express = require('express');
-const {verifyToken, verifyRole} = require('../Middleware/authMiddleware')
+const {verifyToken, verifyRole} = require('../middleware/authMiddleware')
 const {
     updateUserData,
     setHolidays,
@@ -12,8 +12,8 @@ const {
     deleteAllUsers,
     getWeeklyOffDates,
     getHolidays
-} = require('../Controller/adminController');
-const { generateYearlyReport, generateMonthlyReport } = require('../Controller/reportController');
+} = require('../controller/adminController');
+const { generateYearlyReport, generateMonthlyReport } = require('../controller/reportController');
 
 const router = express.Router();
 

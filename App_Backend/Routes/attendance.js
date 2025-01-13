@@ -1,6 +1,6 @@
 const express = require('express');
-const {applyAttendance, getFullCalendar } = require('../Controller/attendanceController');
-const {verifyToken} = require('../Middleware/authMiddleware')
+const {applyAttendance, getFullCalendar } = require('../controller/attendanceController');
+const {verifyToken} = require('../middleware/authMiddleware')
 
 
 const router = express.Router();

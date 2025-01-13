@@ -3,10 +3,10 @@ const http = require('http');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const socketIo = require('socket.io');
-const connectDB = require('./Database/database');
-const auth = require('./Routes/auth')
-const attendance = require('./Routes/attendance')
-const admin = require('./Routes/admin')
+const connectDB = require('./database/database');
+const auth = require('./routes/auth')
+const attendance = require('./routes/attendance')
+const admin = require('./routes/admin')
 
 
 // Load environment variables

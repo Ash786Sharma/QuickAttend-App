@@ -1,9 +1,10 @@
 const moment = require('moment'); // Install moment for date manipulations
-const AdminSettings = require('../Models/AdimnSettings');
+const AdminSettings = require('../models/AdimnSettings');
 const User = require('../models/User');
 
 // Update Calendar Settings (Holidays, Weekly Offs)
 exports.setHolidays = async (req, res) => {
+    
     try {
         const { holidays } = req.body;
         

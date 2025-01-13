@@ -1,6 +1,6 @@
 const moment = require('moment'); // Install moment for date manipulations
 const Attendance = require('../models/Attendance');
-const AdminSettings = require('../Models/AdimnSettings'); // Ensure the path is correct
+const AdminSettings = require('../models/AdimnSettings'); // Ensure the path is correct
 
 // Apply Attendance (Unified Approach)
 exports.applyAttendance = async (req, res) => {
