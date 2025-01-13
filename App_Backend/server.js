@@ -4,6 +4,10 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const socketIo = require('socket.io');
 const connectDB = require('./Database/database');
+const auth = require('./routes/auth')
+const attendance = require('./routes/attendance')
+const admin = require('./Routes/admin')
+
 
 // Load environment variables
 dotenv.config({path: "./Config/config.env"});
@@ -20,9 +24,9 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/attendance', require('./routes/attendance'));
-app.use('/api/admin', require('./Routes/admin'))
+app.use('/api/auth', auth);
+app.use('/api/attendance', attendance);
+app.use('/api/admin', admin);
 
 const userSockets = {}; // Mapping of userId to socketId
 
