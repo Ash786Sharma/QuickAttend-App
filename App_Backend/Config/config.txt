@@ -1,2 +1,0 @@
-MONGO_URI = "<Your Mongo Db URI>"
-JWT_SECRET = "<Your Jwt Secret>"
