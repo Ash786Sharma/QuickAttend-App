@@ -80,9 +80,10 @@ flutter test
 ## 📸 Screenshots
 
 ## Dark 🌚 / Light Theme 🌞
-
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184325.png" alt="Login Screen" width="20%"> 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184321.png" alt="Login Screen" width="20%"> 
+</p>
 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739183990.png" alt="Login Screen" width="20%"> 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184335.png" alt="Login Screen" width="20%"> 
