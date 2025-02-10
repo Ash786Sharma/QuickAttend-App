@@ -102,7 +102,9 @@ flutter test
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184161.png" alt="Login Screen" width="20%"> 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184378.png" alt="Login Screen" width="20%"> 
 </p>
+
 ## Screen Operations📜
+
 <p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739183990.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184005.png" alt="Login Screen" width="20%">
