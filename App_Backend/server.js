@@ -4,12 +4,12 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const socketIo = require('socket.io');
 const connectDB = require('./database/database');
-//const UserNotification = require('./models/UserNotifications'); // Import the UserNotification model
+const UserNotification = require('./models/UserNotifications'); // Import the UserNotification model
 //const notificationService = require('./services/notificationScheduleService'); // Import the notification service
 const auth = require('./routes/auth')
 const attendance = require('./routes/attendance')
 const admin = require('./routes/admin')
-//const notification = require('./routes/notification');
+const notification = require('./routes/notification');
 
 const userSockets = {}; // Mapping of userId to socketId
 
@@ -32,7 +32,7 @@ app.use(express.json());
 app.use('/api/auth', auth);
 app.use('/api/attendance', attendance);
 app.use('/api/admin', admin);
-//app.use('/api/notifications', notification);
+app.use('/api/notifications', notification);
 
 
 
