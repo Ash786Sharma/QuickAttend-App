@@ -43,6 +43,8 @@ dependencies:
   path_provider: ^2.1.5
   permission_handler: ^11.3.1
   jwt_decoder: ^2.0.1
+  flutter_native_timezone: ^2.0.0
+  flutter_background_service: ^5.1.0
   flutter:
     sdk: flutter
   
@@ -51,6 +53,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  workmanager: ^0.5.2
 
 flutter_launcher_icons:
   android: "ic_launcher"
@@ -59,10 +62,19 @@ flutter_launcher_icons:
   min_sdk_android: 21
   adaptive_icon_background: "#FFFFFF" # Choose a background color
   adaptive_icon_foreground: "./lib/Assets/icon/icon.png"
+  adaptive_icon_monochrome: "./lib/Assets/icon/notifictaion.png"
+
+##flutter_launcher_icons:
+##  android: "ic_notification"
+##  ios: true
+##  image_path: "./lib/Assets/icon/notifictaion.png"
+##  min_sdk_android: 21
+##  adaptive_icon_background: "#FFFFFF" # Choose a background color
+##  adaptive_icon_foreground: "./lib/Assets/icon/notifictaion.png"
 
 android_notification_icons:
   image_path: './lib/Assets/icon/notifictaion.png'
-  icon_name: 'ic_notification' # optional, default: 'ic_notification'
+  icon_name: 'ic_notification_foreground' # optional, default: 'ic_notification'
  
 
 dev_dependencies:

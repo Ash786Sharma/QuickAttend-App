@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:permission_handler/permission_handler.dart';
 
 
 
@@ -11,7 +13,7 @@ class NotificationService{
   static Future<void> onDidReceiveNotification(NotificationResponse notificationResponse) async {}
 
   static Future<void> init() async {
-    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings("@drawable/ic_notification");
+    const AndroidInitializationSettings androidInitializationSettings = AndroidInitializationSettings("@drawable/ic_launcher_monochrome");
 
     const DarwinInitializationSettings iOSinitializationSettings = DarwinInitializationSettings();
 
@@ -27,10 +29,27 @@ class NotificationService{
       onDidReceiveBackgroundNotificationResponse: onDidReceiveNotification,
     );
 
-
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
+
+    //await flutterLocalNotificationsPlugin
+    //    .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>() ?.requestExactAlarmsPermission();
+    
+    if (Platform.isAndroid) {
+      final status = await Permission.scheduleExactAlarm.status;
+      if (status.isGranted) {
+        debugPrint('Schedule Exact Alarm permission granted');
+        return;
+      }
+      final result = await Permission.scheduleExactAlarm.request();
+      if (result.isGranted) {
+        debugPrint('Schedule Exact Alarm permission granted');
+        return;
+      }
+      debugPrint('Schedule Exact Alarm permission denied');
+    }
+
   }
 
 
@@ -50,10 +69,10 @@ class NotificationService{
 
   static Future<void> scheduleNotification(String title, String body, DateTime scheduledDate) async{
 
-    //print("Scheduled time : $scheduledDate");
+    //debugPrint("Scheduled time : $scheduledDate");
 
-    //print('tz.local :${tz.local}');
-    //print('tz.TZDateTime :${tz.TZDateTime(tz.local)}');
+    //debugPrint('tz.local :${tz.local}');
+    //debugPrint('tz.TZDateTime :${tz.TZDateTime(tz.local)}');
 
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
       android: AndroidNotificationDetails(
@@ -64,7 +83,7 @@ class NotificationService{
         ),
         iOS: DarwinNotificationDetails()
     );
-    //print("notification time : ${tz.TZDateTime.from(scheduledDate, tz.local)}");
+    //debugPrint("notification time : ${tz.TZDateTime.from(scheduledDate, tz.local)}");
     await flutterLocalNotificationsPlugin.zonedSchedule(0, title, body, tz.TZDateTime.from(scheduledDate, tz.local), platformChannelSpecifics,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dateAndTime, androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -77,7 +96,7 @@ class NotificationService{
   // Get the current local time
   final now = DateTime.now();
 
-  //print('Current Time (local): $now');
+  debugPrint('Current Time (local): $now');
 
   // Create a scheduled time based on the selected TimeOfDay in local time
   final scheduledLocalTime = DateTime(
@@ -88,22 +107,22 @@ class NotificationService{
     time.minute,
   );
 
-  //print('Scheduled Time (local): $scheduledLocalTime');
+  debugPrint('Scheduled Time (local): $scheduledLocalTime');
 
   // If the scheduled time is in the past, move it to the next day
   final adjustedLocalTime = scheduledLocalTime.isBefore(now)
       ? scheduledLocalTime.add(const Duration(days: 1))
       : scheduledLocalTime;
 
-  //print('Adjusted Scheduled Time (local): $adjustedLocalTime');
-
+  debugPrint('Adjusted Scheduled Time (local): $adjustedLocalTime');
+  debugPrint('tz.local: ${tz.local}');
   // Convert local time to UTC for notification scheduling
   final notificationTime = tz.TZDateTime.from(
     adjustedLocalTime,
     tz.local,
   );
 
-  //print('Notification Time (UTC): $notificationTime');
+  debugPrint('Notification Time (UTC): $notificationTime');
 
   const NotificationDetails platformChannelSpecifics = NotificationDetails(
     android: AndroidNotificationDetails(

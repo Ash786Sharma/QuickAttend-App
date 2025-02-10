@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../utils/constants.dart';
 
@@ -38,7 +39,7 @@ class ApiService {
   // **NEW: GET Method**
   static Future<Map<String, dynamic>> get(String endpoint) async {
     final url = Uri.parse('$baseUrl/api$endpoint');
-    print(url);
+    debugPrint('$url');
     try {
       final token = await storage.read(key: 'jwt_token');
       final response = await http.get(
@@ -92,7 +93,7 @@ class ApiService {
   // NEW: File Download Method
 static Future<Map<String, dynamic>> downloadFile(String endpoint) async {
   final url = Uri.parse('$baseUrl/api$endpoint');
-  print('Downloading file from: $url');
+  debugPrint('Downloading file from: $url');
 
   try {
     final token = await storage.read(key: 'jwt_token');
@@ -123,7 +124,7 @@ static Future<Map<String, dynamic>> downloadFile(String endpoint) async {
       final file = File(filePath);
       await file.writeAsBytes(response.bodyBytes);
 
-      print('File saved to: $filePath');
+      debugPrint('File saved to: $filePath');
 
       // Return success with file path
       return {

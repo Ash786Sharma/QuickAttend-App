@@ -50,7 +50,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
         }
     } catch (e) {
       _showSnackBar(e.toString());
-      print('Error: $e');
+      debugPrint('Error: $e');
     } finally {
       setState(() {
         _isLoading = false;
@@ -93,7 +93,7 @@ class _UpdateUserScreenState extends State<UpdateUserScreen> {
 
     } catch (e) {
       _showSnackBar(e.toString());
-      print('Error: $e');
+      debugPrint('Error: $e');
     } finally {
       setState(() {
         _isLoading = false;

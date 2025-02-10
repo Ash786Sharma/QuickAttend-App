@@ -26,8 +26,8 @@ class _ReportGenerationScreenState extends State<ReportGenerationScreen> with Si
     _tabController = TabController(length: 2, vsync: this);
     _selectedYear = DateFormat('yyyy').format(DateTime.now());
     _selectedMonth = DateFormat('MM').format(DateTime.now());
-    print(_selectedMonth);
-    print(_getMonths());
+    //debugPrint(_selectedMonth);
+    //debugPrint('${_getMonths()}');
   }
 
   Future<void> _downloadReport(String type) async {
@@ -49,25 +49,6 @@ class _ReportGenerationScreenState extends State<ReportGenerationScreen> with Si
     });
 
     try {
-
-      // Request storage permission if necessary on Android
-      //if (Platform.isAndroid) {
-      //  final storageStatus = await Permission.storage.status;
-      //  final manageExternalStorageStatus = await Permission.manageExternalStorage.status;
-
-      //  if (storageStatus.isDenied || manageExternalStorageStatus.isDenied) {
-      //    var permissionStatus = await Permission.storage.request();
-
-      //    if (!permissionStatus.isGranted &&
-      //        manageExternalStorageStatus.isDenied) {
-      //      permissionStatus = await Permission.manageExternalStorage.request();
-      //    }
-
-      //    if (!permissionStatus.isGranted) {
-      //      _showMessage('Storage permission denied.');
-      //    }
-      //  }
-      //}
 
       final response = await ApiService.downloadFile(endpoint);
 

@@ -40,7 +40,8 @@ exports.generateYearlyReport = async (req, res) => {
       const reportData = generateReportData(users, attendanceRecords, holidays, weeklyOffDays, startDate, endDate);
   
       // Generate Excel file
-      const fileName = `Yearly_Report_${year}${employeeId ? `_${employeeId}` : ''}.xlsx`;
+      const fileName = `Yearly_Report_${year}${employeeId ? `_${employeeId}` : ''}_${moment().format('YYYYMMDD_HHmmssSSS')}.xlsx`;
+
       await createAndSendExcel(res, reportData, fileName, 'Yearly Report');
     } catch (error) {
       console.error('Error generating yearly report:', error);
@@ -84,7 +85,8 @@ exports.generateYearlyReport = async (req, res) => {
       const reportData = generateReportData(users, attendanceRecords, holidays, weeklyOffDays, startDate, endDate);
   
       // Generate Excel file
-      const fileName = `Monthly_Report_${year}_${month}${employeeId ? `_${employeeId}` : ''}.xlsx`;
+      const fileName = `Monthly_Report_${year}_${month}${employeeId ? `_${employeeId}` : ''}_${moment().format('YYYYMMDD_HHmmssSSS')}.xlsx`;
+
       await createAndSendExcel(res, reportData, fileName, 'Monthly Report');
     } catch (error) {
       console.error('Error generating monthly report:', error);

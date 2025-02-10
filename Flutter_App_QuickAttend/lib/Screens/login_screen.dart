@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../services/api_service.dart';
 import '../widgets/custom_text_field.dart';
@@ -14,7 +15,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController employeeIdController = TextEditingController();
+  final LocalAuthentication auth = LocalAuthentication();
   bool isLoading = false;
+  bool canAuthenticate = false;
 
   // Instance of FlutterSecureStorage
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
@@ -24,16 +27,57 @@ class _LoginScreenState extends State<LoginScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
+  // Check if biometric authentication is supported
+  Future<void> _checkBiometricSupport() async {
+    final canCheckBiometrics = await auth.canCheckBiometrics;
+    final isDeviceSupported = await auth.isDeviceSupported();
+
+    setState(() {
+      canAuthenticate = canCheckBiometrics || isDeviceSupported;
+    });
+
+    if (!canAuthenticate && mounted) {
+      _showSnackBar('This device does not support biometric authentication try other method.');
+    }
+  }
+
+  // Handle biometric or fallback authentication
+  Future<void> _authenticateUser() async {
+    if (employeeIdController.text.isEmpty) {
+      _showSnackBar('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      final isAuthenticated = await auth.authenticate(
+        localizedReason: 'Authenticate to Login!',
+        options: const AuthenticationOptions(
+          stickyAuth: true,
+        ),
+      );
+
+      if (isAuthenticated) {
+        //_showSnackBar('Authentication successful!');
+        await login();
+      } else {
+        _showSnackBar('Authentication failed. Please try again.');
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      _showSnackBar('Error: ${e.toString()}');
+    }
+  }
+
   Future<void> saveUserDetails(String token) async {
   try {
     
     // Store token and user data securely
     await secureStorage.write(key: 'jwt_token', value: token);
     //_showSnackBar("User details saved securely.");
-    //print("User details saved securely.");
+    //debugPrint("User details saved securely.");
   } catch (e) {
     _showSnackBar("Error saving user details: $e");
-    print("Error saving user details: $e");
+    //debugPrint("Error saving user details: $e");
   }
 }
 
@@ -69,16 +113,22 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       // Handle server-provided errors (e.g., user not found)
       _showSnackBar('${response['error']}, Please Register.');
-      print('Error 0: $response');
+      debugPrint('Error 0: $response');
     }
   } catch (e) {
     // Handle errors gracefully
     _showSnackBar(e.toString());
-    print('Error: $e');
+    debugPrint('Error: $e');
   } finally {
     setState(() => isLoading = false);
   }
 }
+
+  @override
+  void initState() {
+    super.initState();
+    _checkBiometricSupport();
+  }
 
 
   Future<bool> _onWillPop() async {
@@ -174,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 60),
               CustomButton(
                 label: 'Login',
-                onPressed: login,
+                onPressed: _authenticateUser,
                 isLoading: isLoading,
               ),
               const SizedBox(height: 250),

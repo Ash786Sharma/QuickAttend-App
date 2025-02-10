@@ -45,7 +45,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
       }
     } catch (e) {
       _showSnackBar(e.toString());
-      print('Error: $e');
+      debugPrint('Error: $e');
     } finally {
       setState(() {
         isLoading = false;
@@ -72,7 +72,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
       }
     } catch (e) {
       _showSnackBar(e.toString());
-      print('Error: $e');
+      debugPrint('Error: $e');
     } finally {
       setState(() {
         isLoading = false;
@@ -98,7 +98,7 @@ class _DeleteUserScreenState extends State<DeleteUserScreen> {
       }
     } catch (e) {
       _showSnackBar(e.toString());
-      print('Error: $e');
+      debugPrint('Error: $e');
     } finally {
       setState(() {
         isLoading = false;

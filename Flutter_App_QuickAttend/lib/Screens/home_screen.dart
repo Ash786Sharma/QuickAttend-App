@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../services/api_service.dart';
 import '../Services/socket_service.dart';
+import '../Services/notification_service.dart';
 import './on_duty_form.dart';
 import './leave_form.dart';
 
@@ -33,6 +36,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
+    // Request ignore battrey optimization permissions
+    _requestIgnoreBattreyOptimization();
     
     // Listen for calendar updates
     SocketService().on('refresh_calendar', (_) {
@@ -40,9 +45,18 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     });
     // Listen for user-specific calendar refresh
     SocketService().on('refresh_calendar_user', (_) {
-      //print("User-specific calendar refresh triggered");
       _fetchCalendarSettings();
       // Implement calendar refresh logic here
+    });
+    
+    SocketService().on('daily-notification',(_) {
+      debugPrint('Notification received');
+      _dailyNotification();
+    });
+    
+    SocketService().on('daily-notification-pending', (_) {
+      debugPrint('Pending Notification received');
+      _pendingNotification();
     });
 
     _loadUserDetails();
@@ -55,6 +69,22 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     super.dispose();
   }
 
+  Future<void> _requestIgnoreBattreyOptimization() async {
+    if (Platform.isAndroid) {
+      final status = await Permission.ignoreBatteryOptimizations.status;
+      if (status.isGranted) {
+        debugPrint('Battery optimization permission granted');
+        return;
+      }
+      final result = await Permission.ignoreBatteryOptimizations.request();
+      if (result.isGranted) {
+        debugPrint('Battery optimization permission granted');
+        return;
+      }
+      debugPrint('Battery optimization permission denied');
+    }
+  }
+
   Future<void> _loadUserDetails() async {
     final userToken = await storage.read(key: 'jwt_token');
     if (userToken != null) {
@@ -63,14 +93,25 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         setState(() {
           userData = userMap['userData'];
         });
-        //debugPrint('$userData');
-        SocketService().emit('register_user', (userData?['employeeId']));
         _fetchCalendarSettings();
       } catch (e) {
         debugPrint('Error decoding userJson: $e');
       }
     }
   }
+
+  Future<void> _dailyNotification() async {
+      // Call the showInstantNotification method with the notification message
+      await NotificationService.showInstantNotification('Daily Reminder!', 'Please don`t forget to mark your attendance for today!');
+      
+  }
+
+  Future<void> _pendingNotification() async {
+      // Call the showInstantNotification method with the notification message
+      await NotificationService.showInstantNotification('Pending Daily Reminder!', 'Please don`t forget to mark your attendance for today!');
+      
+  }
+
 
   Future<void> _fetchCalendarSettings() async {
     try {
@@ -99,6 +140,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   Future<void> _logout(BuildContext context) async {
     await storage.deleteAll();
+    //BackgroundService.stopService();
     Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
   }
 

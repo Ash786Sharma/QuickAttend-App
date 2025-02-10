@@ -47,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     try {
       final isAuthenticated = await auth.authenticate(
-        localizedReason: 'Authenticate to complete registration',
+        localizedReason: 'Authenticate to complete Registration!',
         options: const AuthenticationOptions(
           stickyAuth: true,
         ),
@@ -74,7 +74,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'employeeId': employeeIdController.text,
       });
 
-      print(response);
+      //debugPrint(response);
 
       if (mounted) {
         // Extract and display the message from the response
@@ -83,11 +83,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Navigator.of(context).pushNamed('/login');
       } else {
         _showSnackBar('Error: ${response['error']}');
-        print('Error 1: ${response['error']}');
+        //debugPrint('Error 1: ${response['error']}');
       }
     } catch (e) {
       _showSnackBar('Error: ${e.toString()}');
-      print('Error 2: ${e.toString()}');
+      //debugPrint('Error 2: ${e.toString()}');
     } finally {
       setState(() => isLoading = false); 
     }

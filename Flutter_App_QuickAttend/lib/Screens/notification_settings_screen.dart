@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:quickattend/Widgets/custom_button.dart';
 import '../Services/notification_service.dart'; // Ensure this points to your notification logic file
+
 
 
 class NotificationSettingsScreen extends StatefulWidget {
@@ -18,27 +21,41 @@ class _NotificationSettingsScreenState
   bool _notificationsEnabled = false;
   TimeOfDay? _savedTime; // To display the saved time prominently
   bool _isLoading = true; 
+  bool _isLoadingSave = false;
+  Map<String, dynamic>? userData;
+  String? _timeZone;
 
   @override
   void initState() {
     super.initState();
     _loadSettings();
-    print(TimeOfDay.now());
+    debugPrint('${TimeOfDay.now()}');
+  }
+
+  void _showSnackBar(String message) {
+    if(!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
   // Load saved settings on startup
   Future<void> _loadSettings() async {
     final savedTime = await storage.read(key: 'notificationTime');
-    setState(() {
-      _notificationsEnabled =
-          savedTime != null; // Enable notifications if time is saved
-      if (savedTime != null) {
-        final parts = savedTime.split(':');
+    final savedTimeZone = await storage.read(key: 'notificationTimeZone');
+    if(savedTime != null && savedTimeZone != null){
+      debugPrint("saved time: $savedTime");
+      setState(() {
+      _notificationsEnabled = true; // Enable notifications if time is saved
+      final parts = savedTime.split(':');
         _savedTime = TimeOfDay(
-          hour: int.parse(parts[0]),
-          minute: int.parse(parts[1]),
+        hour: int.parse(parts[0]),
+        minute: int.parse(parts[1]),
         );
-      }
+      _timeZone = savedTimeZone;
+      });
+    }else{
+      _showSnackBar("Notification time not set yet!");
+    }
+    setState(() {
       _isLoading = false; // Mark loading as complete
     });
   }
@@ -54,32 +71,48 @@ class _NotificationSettingsScreenState
       setState(() {
         _selectedTime = picked;
         _savedTime = picked;
-        print("selec: $_selectedTime, saved: $_savedTime");
+        debugPrint("selec: $_selectedTime, saved: $_savedTime");
       });
     }
   }
 
   Future<void> _saveSettings() async {
+  setState(() {
+    _isLoadingSave = true;
+  });
+  final String timeZone = await FlutterNativeTimezone.getLocalTimezone();
   // Save the selected notification time to secure storage
   await storage.write(
     key: 'notificationTime',
     value: '${_selectedTime.hour}:${_selectedTime.minute}',
   );
 
-  print("selected time: $_selectedTime");
-  // Schedule a daily notification at the selected time
-  NotificationService.scheduleDailyNotification(
-    "Daily Reminder",
-    "Don't forget to mark your attendance!",
-    _selectedTime,
+  await storage.write(
+    key: 'notificationTimeZone',
+    value: timeZone,
   );
 
-  // Display confirmation message
-  if(!mounted) return;
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text('Notification settings saved!')),
-  );
+  
+  debugPrint("selected time: $_selectedTime");
+
+  await _trigerScheduleNotification();
+  _showSnackBar('Notification time saved successfully!');
+  setState(() {
+  _isLoadingSave = false;
+  });
 }
+
+  Future<void> _trigerNotification() async {
+          await NotificationService.showInstantNotification('this is test title', 'this is test message');
+  }
+
+  Future<void> _trigerScheduleNotification() async {
+          await NotificationService.scheduleDailyNotification(
+            "Daily Reminder",
+            "Don't forget to mark your attendance!",
+            _selectedTime,
+            );
+  }
 
 
   // Toggle notifications
@@ -92,13 +125,9 @@ class _NotificationSettingsScreenState
         NotificationService.cancelAllNotifications();
       }
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(value
+    _showSnackBar(value
             ? 'Notifications enabled!'
-            : 'Notifications disabled!'),
-      ),
-    );
+            : 'Notifications disabled!');
   }
 
 
@@ -154,6 +183,20 @@ class _NotificationSettingsScreenState
                     ),
                   ),
                   const SizedBox(height: 20),
+                  const Text(
+                    'Saved Notification Time Zone:',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  if (_timeZone != null)
+                  Text(
+                    _timeZone!,
+                    style: const TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                 ],
               ),
 
@@ -169,12 +212,29 @@ class _NotificationSettingsScreenState
                       onPressed: _selectTime,
                     ),
                   ),
-                  ElevatedButton(
+                  Center(
+                  child: SizedBox(
+                  width: 200,
+                  child:CustomButton(
+                    label: 'Save Settings',
                     onPressed: _saveSettings,
-                    child: const Text('Save Settings'),
+                    isLoading: _isLoadingSave,
+                    ),
                   ),
-                ],
-              ),
+                ),
+                 const SizedBox(height: 20),
+                 Center(
+                  child: SizedBox(
+                  width: 200,
+                  child:CustomButton(
+                    label: 'trigger Mock',
+                    onPressed: _trigerNotification,
+                    isLoading: false,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

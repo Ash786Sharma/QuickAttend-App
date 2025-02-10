@@ -99,16 +99,6 @@ class _ApplyAttendanceScreenState extends State<ApplyAttendanceScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //const Text(
-                //  "Selected Date:",
-                //  style: TextStyle(fontSize: 16),
-                //),
-                //Text(
-                //  _selectedDate != null ? _selectedDate!.toLocal().toString().split(' ')[0]
-                //      : "No Date Selected",
-                //  style: const TextStyle(
-                //      fontSize: 16, fontWeight: FontWeight.bold),
-                //),
                 ElevatedButton(
                   onPressed: _pickDate,
                   child: const Text("Pick Date"),

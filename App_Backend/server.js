@@ -4,9 +4,14 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const socketIo = require('socket.io');
 const connectDB = require('./database/database');
+//const UserNotification = require('./models/UserNotifications'); // Import the UserNotification model
+//const notificationService = require('./services/notificationScheduleService'); // Import the notification service
 const auth = require('./routes/auth')
 const attendance = require('./routes/attendance')
 const admin = require('./routes/admin')
+//const notification = require('./routes/notification');
+
+const userSockets = {}; // Mapping of userId to socketId
 
 
 // Load environment variables
@@ -27,16 +32,41 @@ app.use(express.json());
 app.use('/api/auth', auth);
 app.use('/api/attendance', attendance);
 app.use('/api/admin', admin);
+//app.use('/api/notifications', notification);
 
-const userSockets = {}; // Mapping of userId to socketId
+
+
+// Initialize notification service
+//notificationService(io, userSockets);
 
 io.on('connection', (socket) => {
     console.log('New client connected:', socket.id);
 
     // Register user with their userId
-    socket.on('register_user', (userId) => {
+    socket.on('register_user', async (userId) => {
         userSockets[userId] = socket.id; // Map userId to socketId
         console.log(`User ${userId} registered with socket ${socket.id}`);
+
+        //try {
+           // Check if the user has pending notifications
+        //    const user = await UserNotification.findOne({ employeeId: userId, pendingNotification: true });
+        //    console.log('User:', user);
+        //    
+        //    if (user) {
+        //        const message = `This is your pending daily notification!`;
+        //        console.log('Emitting pending notification to user:', userId);
+                // Emit the notification
+        //        io.to(socket.id).emit('daily-notification-pending');
+        //
+                // Reset the pendingNotification flag
+        //        await UserNotification.updateOne(
+        //            { employeeId: userId },
+        //            { $set: { pendingNotification: false } }
+        //        );
+        //    }
+        //} catch (error) {
+        //    console.error('Error sending pending notifications:', error);
+        //}
     });
 
     // Global calendar refresh for weekly off or holiday updates
