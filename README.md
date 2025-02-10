@@ -88,53 +88,59 @@ flutter test
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739183990.png" alt="Login Screen" width="20%"> 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184335.png" alt="Login Screen" width="20%"> 
 </p>
-
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184055.png" alt="Login Screen" width="20%"> 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184359.png" alt="Login Screen" width="20%"> 
 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184270.png" alt="Login Screen" width="20%"> 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184421.png" alt="Login Screen" width="20%"> 
-
+</p>
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184307.png" alt="Login Screen" width="20%"> 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184431.png" alt="Login Screen" width="20%"> 
 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184161.png" alt="Login Screen" width="20%"> 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184378.png" alt="Login Screen" width="20%"> 
-
+</p>
 ## Screen Operations📜
-
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739183990.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184005.png" alt="Login Screen" width="20%">
 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184014.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184034.png" alt="Login Screen" width="20%">
-
+</p>
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184049.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184055.png" alt="Login Screen" width="20%">
 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184061.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184087.png" alt="Login Screen" width="20%">
-
+</p>
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184106.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184132.png" alt="Login Screen" width="20%">
 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184157.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184161.png" alt="Login Screen" width="20%">
-
+</p>
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184166.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184171.png" alt="Login Screen" width="20%">
 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184199.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184215.png" alt="Login Screen" width="20%">
-
+</p>
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184225.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184228.png" alt="Login Screen" width="20%">
 
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184237.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184242.png" alt="Login Screen" width="20%">
-
+</p>
+<p align="center">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184270.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184307.png" alt="Login Screen" width="20%">
-
+</p>
 ---
 This documentation serves as a reference for developers maintaining and expanding the project. 🚀
