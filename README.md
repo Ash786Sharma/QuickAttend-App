@@ -144,5 +144,7 @@ flutter test
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184270.png" alt="Login Screen" width="20%">
 <img src="Flutter_App_QuickAttend\lib\Assets\screenshots\Screenshot_1739184307.png" alt="Login Screen" width="20%">
 </p>
+
 ---
+
 This documentation serves as a reference for developers maintaining and expanding the project. 🚀
